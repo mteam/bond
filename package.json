@@ -9,5 +9,8 @@
   },
   "directories": {
     "src": "./src"
+  },
+  "engines": {
+    "browser": "*"
   }
 }
