@@ -1,10 +1,13 @@
 {
   "name": "lovejs-helpers",
+  "author": "Michal Miskernik <michal@miskernik.sk>",
   "version": "0.0.1",
-  "main": "index.js",
+  "main": "./src/index",
   "repository": {
     "type": "git",
     "url": "https://github.com/michalmiskernik/lovejs-helpers.git"
   },
-  "author": "Michal Miskernik <michal@miskernik.sk>",
+  "directories": {
+    "src": "./src"
+  }
 }
