@@ -1,22 +1,16 @@
 love = require 'lovejs'
-gamestate = exports
 
-current = null
+$current = null
+$instances = {}
 
-gamestate.new = -> {}
+exports.switch = (state, args...) ->
+  if not state.instance?
+    state.instance = new state
 
-gamestate.switch = (to, args...) ->
   love.timer.nextTick ->
-    current?.leave?()
-    prev = current
-    gamestate.init(to)
-    current = to
-    current.enter(args...)
-
-gamestate.init = (state) ->
-  unless state.__used
-    state.init?()
-    state.__used = true
+    $current?.leave?()
+    $current = state.instance
+    $current.enter?(args...)
 
 callbacks = [
   'update', 'draw', 'keypressed', 'keyreleased',
@@ -25,9 +19,31 @@ callbacks = [
 
 for name in callbacks
   do (name) ->
-    gamestate[name] = ->
-      current[name]?(arguments...)
+    exports[name] = ->
+      $current[name]?(arguments...)
 
-gamestate.register = ->
+exports.register = ->
   for name in callbacks
-    love[name] ?= gamestate[name]
+    love[name] ?= exports[name]
+
+
+
+class exports.Gamestate
+  @assets: (assets) ->
+    love.assets.add(asset for name, asset of assets)
+
+    @_assets ?= {}
+
+    for name, asset of assets
+      @_assets[name] = asset.getContent()
+
+  @image: (url) ->
+    love.assets.newImage(url)
+
+  constructor: ->
+    if @constructor._assets?
+      @assets = {}
+      for name, asset in @constructor._assets
+        @assets[name] = asset
+
+    @init?()
