@@ -43,7 +43,7 @@ class exports.Gamestate
   constructor: ->
     if @constructor._assets?
       @assets = {}
-      for name, asset in @constructor._assets
+      for name, asset of @constructor._assets
         @assets[name] = asset
 
     @init?()
