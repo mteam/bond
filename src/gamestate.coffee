@@ -40,6 +40,9 @@ class exports.Gamestate
   @image: (url) ->
     love.assets.newImage(url)
 
+  @switch: (args...) ->
+    exports.switch(this, args...)
+
   constructor: ->
     if @constructor._assets?
       @assets = {}
