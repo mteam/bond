@@ -8,5 +8,10 @@
   },
   "directories": {
     "source": "src"
+  },
+  "main": "src/index.coffee",
+  "devDependencies": {
+    "should": "~1.2.0",
+    "mocha": "~1.6.0"
   }
 }
