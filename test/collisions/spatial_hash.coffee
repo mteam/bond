@@ -6,14 +6,15 @@ describe 'SpatialHash', ->
   b = { aabb: new AABB(150, 150, 250, 250) }
   c = { aabb: new AABB(300, 300, 400, 400) }
 
-  describe '#coord', ->
-    it 'should calculate coordinate', ->
+  describe '#coords', ->
+    it 'should calculate coordinates', ->
       sh = new SpatialHash(50)
 
-      sh.coord(0).should.be.equal(0)
-      sh.coord(20).should.be.equal(0)
-      sh.coord(50).should.be.equal(1)
-      sh.coord(70).should.be.equal(1)
+      sh.coords(new AABB(0, 0, 100, 100))
+        .should.be.eql(x1: 0, y1: 0, x2: 1, y2: 1)
+
+      sh.coords(new AABB(75, 125, 175, 225))
+        .should.be.eql(x1: 1, y1: 2, x2: 3, y2: 4)
 
   describe '#cell', ->
     it 'should create non-existent cells', ->
@@ -88,20 +89,20 @@ describe 'SpatialHash', ->
   describe '#collisions', ->
     it 'should not detect any collisions with one object', ->
       sh = new SpatialHash(50)
-      sh.insert(a)
+      sh.insert(a.aabb, a)
 
       sh.collisions(a.aabb, a).should.be.empty
 
     it 'should not detect any collisions with distant objects', ->
       sh = new SpatialHash(50)
-      sh.insert(a)
-      sh.insert(c)
+      sh.insert(a.aabb, a)
+      sh.insert(c.aabb, c)
 
       sh.collisions(a.aabb, a).should.be.empty
 
     it 'should detect collisions', ->
       sh = new SpatialHash(50)
-      sh.insert(a)
-      sh.insert(b)
+      sh.insert(a.aabb, a)
+      sh.insert(b.aabb, b)
 
-      sh.collisions(a.aabb, b).should.be.eql([b])
+      sh.collisions(a.aabb, a).should.be.eql([b])
