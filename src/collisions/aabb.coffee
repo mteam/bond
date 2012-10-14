@@ -18,4 +18,10 @@ class AABB
     @max.x = x2
     @max.y = y2
 
+  move: (x, y) ->
+    @min.x += x
+    @min.y += y
+    @max.x += x
+    @max.y += y
+
 module.exports = AABB
