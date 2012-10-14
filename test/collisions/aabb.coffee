@@ -16,6 +16,13 @@ describe 'AABB', ->
       AABB.overlaps(a, b).should.be.true
       AABB.overlaps(b, a).should.be.true
 
+    it 'should return true when overlapping, but with no corners', ->
+      a = new AABB(100, 50, 150, 200)
+      b = new AABB(50, 100, 200, 150)
+
+      AABB.overlaps(a, b).should.be.true
+      AABB.overlaps(a, b).should.be.true
+
   describe '#move', ->
     it 'should move AABB', ->
       a = new AABB(100, 100, 200, 200)
