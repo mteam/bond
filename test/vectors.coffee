@@ -1,8 +1,8 @@
-Vector = require '../src/vectors'
+vectors = require '../src/vectors'
 
 describe 'Vector', ->
   create = (x, y) ->
-    (new Vector).update([x, y])
+    new vectors.Vector(x, y)
 
   describe '#clone', ->
     it 'should create equal vector', ->
@@ -14,7 +14,7 @@ describe 'Vector', ->
     it 'should change vector', ->
       v = create(3, 4)
 
-      v.update([5, 6])
+      v.update(5, 6)
 
       v.should.have.property('x', 5)
       v.should.have.property('y', 6)
@@ -24,7 +24,7 @@ describe 'Vector', ->
       v1 = create(3, 4)
       v2 = create(4, 5)
 
-      v1.add(v2)
+      v1.vadd(v2)
 
       v1.should.have.property('x', 7)
       v1.should.have.property('y', 9)
@@ -34,7 +34,7 @@ describe 'Vector', ->
       v1 = create(3, 4)
       v2 = create(5, 5)
 
-      v2.subtract(v1)
+      v2.vsubtract(v1)
 
       v2.should.have.property('x', 2)
       v2.should.have.property('y', 1)

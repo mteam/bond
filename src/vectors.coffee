@@ -1,24 +1,32 @@
 class Vector
-  constructor: ->
-    @update([0, 0])
+  constructor: (x = 0, y = 0) ->
+    @update(x, y)
+  
+  reset: ->
+    @update(0, 0)
 
   clone: ->
-    v = new Vector
-    v.x = @x
-    v.y = @y
-    v
+    new Vector(@x, @y)
 
-  update: ([@x, @y]) ->
+  update: (@x, @y) ->
     this
 
-  add: ({x, y}) ->
+  add: (x, y) ->
     @x += x
     @y += y
     this
 
-  subtract: ({x, y}) ->
+  vadd: ({x, y}) ->
+    @add(x, y)
+    this
+
+  subtract: (x, y) ->
     @x -= x
     @y -= y
+    this
+
+  vsubtract: ({x, y}) ->
+    @subtract(x, y)
     this
 
   multiply: (n) ->
@@ -37,4 +45,4 @@ class Vector
   normalize: ->
     @divide(@length())
 
-module.exports = Vector
+exports.Vector = Vector
