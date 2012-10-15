@@ -11,6 +11,9 @@ class Vector
   update: (@x, @y) ->
     this
 
+  vupdate: ({@x, @y}) ->
+    this
+
   add: (x, y) ->
     @x += x
     @y += y
