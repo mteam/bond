@@ -61,3 +61,31 @@ describe 'AABB', ->
 
       a.min.should.eql(x: 150, y: 50)
       a.max.should.eql(x: 250, y: 150)
+
+  describe '#resolve', ->
+    a = new AABB(0, 0, 400, 400)
+
+    test = (x1, y1, x2, y2, vx, vy) ->
+      it "should work at [#{x1}; #{y1}]", ->
+        b = new AABB(x1, y1, x2, y2)
+
+        v = a.resolve(b)
+
+        v.should.have.property('x', vx)
+        v.should.have.property('y', vy)
+
+    context 'when on the edge', ->
+      test(350, 50, 450, 150, 50, 0)
+      test(350, 250, 450, 350, 50, 0)
+      test(50, 350, 150, 450, 0, 50)
+      test(250, 350, 350, 450, 0, 50)
+      test(-50, 50, 50, 150, -50, 0)
+      test(-50, 250, 50, 350, -50, 0)
+      test(50, -50, 150, 50, 0, -50)
+      test(250, -50, 350, 50, 0, -50)
+
+    context 'when inside', ->
+      test(50, 50, 100, 150, -100, 0)
+      test(250, 50, 350, 100, 0, -100)
+      test(300, 250, 350, 350, 100, 0)
+      test(50, 300, 150, 350, 0, 100)
