@@ -2,7 +2,7 @@ should = require 'should'
 AABB = require '../../src/collisions/aabb'
 
 describe 'AABB', ->
-  describe '#collides', ->
+  describe '.collides', ->
     it 'should return false when not colliding', ->
       a = new AABB(100, 100, 200, 200)
       b = new AABB(300, 300, 400, 400)
@@ -24,7 +24,7 @@ describe 'AABB', ->
       AABB.collides(a, b).should.be.true
       AABB.collides(a, b).should.be.true
 
-  describe '#overlap', ->
+  describe '.overlap', ->
     it 'should return null when not colliding', ->
       a = new AABB(100, 100, 200, 200)
       b = new AABB(300, 300, 400, 400)
