@@ -20,30 +20,19 @@ class AABB
     aabb.max.x = Math.min(a.max.x, b.max.x)
     aabb.max.y = Math.min(a.max.y, b.max.y)
 
-    aabb.update()
-
     aabb
 
   constructor: (x1, y1, x2, y2) ->
     @min = {}
     @max = {}
-    @center = new Vector
 
-    @setPosition(x1, y1, x2, y2)
+    @update(x1, y1, x2, y2)
 
-  setPosition: (x1, y1, x2, y2) ->
+  update: (x1, y1, x2, y2) ->
     @min.x = x1
     @min.y = y1
     @max.x = x2
     @max.y = y2
-
-    @update()
-
-    return
-
-  update: ->
-    @center.x = (@min.x + @max.x) / 2
-    @center.y = (@min.y + @max.y) / 2
 
     return
 
