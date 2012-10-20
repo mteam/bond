@@ -1,3 +1,8 @@
+AABB = require './aabb'
+
+isValid = (obj) ->
+  obj.aabb? and obj.aabb instanceof AABB
+
 class SpatialHash
   constructor: (@cellSize) ->
     @hash = {}
@@ -9,8 +14,11 @@ class SpatialHash
       cell.length = 0
     return
 
-  insert: (aabb, obj) ->
-    {x1, y1, x2, y2} = @coords(aabb)
+  insert: (obj) ->
+    if not isValid(obj)
+      throw new Error("Object '#{obj}' couldn't be inserted in spatial hash")
+
+    {x1, y1, x2, y2} = @coords(obj.aabb)
 
     for x in [x1..x2]
       for y in [y1..y2]
@@ -18,14 +26,21 @@ class SpatialHash
 
     return
 
-  collisions: (aabb, obj) ->
+  collisions: (obj) ->
+    if not isValid(obj)
+      throw new Error("Couldn't check collisions for object '#{obj}'")
+
     set = []
-    {x1, y1, x2, y2} = @coords(aabb)
+    {x1, y1, x2, y2} = @coords(obj.aabb)
 
     for x in [x1..x2]
       for y in [y1..y2]
         for other in @cell(x, y)
-          if other isnt obj and other not in set
+          if (
+            other isnt obj and
+            other not in set and
+            AABB.collides(other.aabb, obj.aabb)
+          )
             set.push(other)
 
     set
