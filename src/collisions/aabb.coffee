@@ -59,22 +59,30 @@ class AABB
 
   resolve: (other) ->
     v = new Vector
-    u = new Vector
+    a = this
+    b = other
 
-    v.vupdate(other.center).vsubtract(@center)
+    left = b.max.x - a.min.x
+    right = a.max.x - b.min.x
+    up = b.max.y - a.min.y
+    down = a.max.y - b.min.y
+
+    if left < right
+      v.x = -1 * left
+    else
+      v.x = right
+
+    if up < down
+      v.y = -1 * up
+    else
+      v.y = down
 
     if Math.abs(v.x) > Math.abs(v.y)
-      if v.x > 0
-        u.x = @max.x - other.min.x
-      else
-        u.x = @min.x - other.max.x
+      v.x = 0
     else
-      if v.y > 0
-        u.y = @max.y - other.min.y
-      else
-        u.y = @min.y - other.max.y
+      v.y = 0
 
-    u
+    v
 
 
 module.exports = AABB
