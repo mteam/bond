@@ -8,4 +8,5 @@ module.exports =
   Loader: require './loader'
   tiled: require './tiled'
   timerQueue: require './timer_queue'
+  touch: require './touch'
   vectors: require './vectors'
