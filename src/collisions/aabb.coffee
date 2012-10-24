@@ -42,8 +42,6 @@ class AABB
     @max.x += x
     @max.y += y
 
-    @update()
-
     return
 
   resolve: (other) ->
