@@ -44,6 +44,14 @@ class AABB
 
     return
 
+  moveTo: (x, y) ->
+    right = x - @min.x
+    down = y - @min.y
+
+    @move(right, down)
+
+    return
+
   resolve: (other) ->
     v = new Vector
     a = this
@@ -70,6 +78,12 @@ class AABB
       v.y = 0
 
     v
+
+  getWidth: ->
+    @max.x - @min.x
+
+  getHeight: ->
+    @max.y - @min.y
 
 
 module.exports = AABB
