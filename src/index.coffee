@@ -1,5 +1,6 @@
 module.exports =
   animation: require './animation'
+  Camera: require './camera'
   collisions: require './collisions'
   components: require './components'
   gamestate: require './gamestate'
