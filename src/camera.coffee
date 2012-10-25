@@ -15,6 +15,17 @@ class Camera
       y - (@aabb.getHeight() / 2)
     )
 
+  fix: (x1, y1, x2, y2) ->
+    if @aabb.min.x < x1
+      @aabb.move(-1 * (@aabb.min.x - x1), 0)
+    else if @aabb.max.x > x2
+      @aabb.move(-1 * (@aabb.max.x - x2), 0)
+
+    if @aabb.min.y < y1
+      @aabb.move(0, -1 * (@aabb.min.y - y1))
+    else if @aabb.max.y > y2
+      @aabb.move(0, -1 * (@aabb.max.y - y2))
+
   getOffset: ->
     @aabb.min
 
