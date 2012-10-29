@@ -7,6 +7,7 @@ module.exports =
   gui: require './gui'
   linkedList: require './linked_list'
   Loader: require './loader'
+  Queue: require './queue'
   tiled: require './tiled'
   timerQueue: require './timer_queue'
   touch: require './touch'
