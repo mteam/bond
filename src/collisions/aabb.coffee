@@ -52,6 +52,12 @@ class AABB
 
     return
 
+  resize: (w, h) ->
+    @max.x = @min.x + w
+    @max.y = @min.y + h
+
+    return
+
   resolve: (other) ->
     v = new Vector
     a = this
