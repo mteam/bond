@@ -42,8 +42,11 @@ class Vector
     @y /= n
     this
 
+  length2: ->
+    @x * @x + @y * @y
+
   length: ->
-    Math.sqrt(@x * @x + @y * @y)
+    Math.sqrt(@length2())
 
   normalize: ->
     @divide(@length())
