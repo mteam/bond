@@ -50,7 +50,6 @@ class Collider
   update: (x, y) ->
     @step.update(x, y)
     @nstep.vupdate(@step).normalize()
-    @moving = true
 
   collision: ->
 

@@ -18,6 +18,7 @@ class Manager
   update: ->
     for c in @colliders when not c.frozen
       c.nstep.multiply(@max)
+      c.moving = true
 
     moved = true
 
