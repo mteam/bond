@@ -27,10 +27,6 @@ class Manager
       for c, i in @colliders when c.moving and not c.frozen
         len2 = c.step.length2()
 
-        if len2 is 0
-          c.stop()
-          break
-
         if len2 <= @max2
           c.aabb.move(c.step.x, c.step.y)
           c.step.reset()
@@ -43,6 +39,10 @@ class Manager
       if moved
         @rebuild()
         @trigger()
+
+      for c in @colliders when c.moving and not c.frozen
+        if c.step.length2() is 0
+          c.stop()
 
     return
 
