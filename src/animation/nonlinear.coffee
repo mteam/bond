@@ -18,9 +18,12 @@ class NonlinearAnimation extends love.graphics.Drawable
     @frame++
     if @frame >= @sequence.length
       @frame = 0
+      @end()
 
   curr: ->
     @sequence[@frame]
+
+  end: ->
 
   draw: (ctx, x, y) ->
     quad = @reel.getQuad(@curr()[0])
