@@ -1,5 +1,8 @@
 {Vector} = require '../vectors'
 
+round = (n) ->
+  Math.round(n * 1000) / 1000
+
 class AABB
   @collides: (a, b) ->
     not (
@@ -37,10 +40,10 @@ class AABB
     return
 
   move: (x, y) ->
-    @min.x += x
-    @min.y += y
-    @max.x += x
-    @max.y += y
+    @min.x = round(@min.x + x)
+    @min.y = round(@min.y + y)
+    @max.x = round(@max.x + x)
+    @max.y = round(@max.y + y)
 
     return
 
