@@ -49,20 +49,26 @@ class SpatialHash
     @hash["#{x}x#{y}"] ?= []
 
   coords: (aabb) ->
-    @_coords.x1 = @coord(aabb.min.x)
-    @_coords.y1 = @coord(aabb.min.y)
+    @_coords.x1 = @coordMin(aabb.min.x)
+    @_coords.y1 = @coordMin(aabb.min.y)
 
     # max coordinates are subtracted by 1, so that when they are in the
     # right bottom corner of a cell, they don't overflow.
     # just think about it.
     # when the max coordinates are 100x100 and the cell size is 50, @coord(100)
     # would return 2, but the max point of AABB belongs to cell 1x1, not 2x2.
-    @_coords.x2 = @coord(aabb.max.x - 1)
-    @_coords.y2 = @coord(aabb.max.y - 1)
+    @_coords.x2 = @coordMax(aabb.max.x)
+    @_coords.y2 = @coordMax(aabb.max.y)
 
     @_coords
 
-  coord: (x) ->
+  coordMin: (x) ->
     (x / @cellSize) | 0
+
+  coordMax: (x) ->
+    if x % @cellSize is 0
+      (x / @cellSize) - 1
+    else
+      (x / @cellSize) | 0
 
 module.exports = SpatialHash
