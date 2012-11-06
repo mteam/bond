@@ -88,6 +88,11 @@ class AABB
 
     v
 
+  distanceTo: (other, dist = {}) ->
+    dist.x = (@min.x + @max.x - other.min.x + other.max.x) / 2
+    dist.y = (@min.y + @max.y - other.min.y + other.max.y) / 2
+    dist
+
   getWidth: ->
     @max.x - @min.x
 
