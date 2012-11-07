@@ -94,3 +94,19 @@ describe 'AABB', ->
       test(250, 50, 350, 100, 0, -100)
       test(300, 250, 350, 350, 100, 0)
       test(50, 300, 150, 350, 0, 100)
+
+  describe '#distanceTo', ->
+    it 'should work correctly', ->
+      a = new AABB(10, 10, 20, 20)
+      b = new AABB(30, 30, 40, 40)
+      c = new AABB(200, 0, 300, 700)
+
+      dist = a.distanceTo(b)
+
+      dist.should.have.property('x', 20)
+      dist.should.have.property('y', 20)
+
+      dist = a.distanceTo(c)
+
+      dist.x.should.equal(235)
+      dist.y.should.equal(335)
