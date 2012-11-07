@@ -17,6 +17,9 @@ class Animation extends love.graphics.Drawable
     @frame++
     if @frame >= @sequence.length
       @frame = 0
+      @end()
+
+  end: ->
 
   draw: (ctx, x, y) ->
     quad = @reel.getQuad(@sequence[@frame])
