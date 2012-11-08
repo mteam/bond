@@ -62,7 +62,12 @@ class Manager
     return
 
   trigger: ->
-    for collider in @colliders when collider.moving and not collider.frozen
+    for i in [@colliders.length-1..0] by -1
+      collider = @colliders[i]
+
+      if not collider.moving or collider.frozen
+        continue
+      
       for col in @hash.collisions(collider)
         collider.collision(col)
 
