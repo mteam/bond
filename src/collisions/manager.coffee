@@ -15,6 +15,12 @@ class Manager
 
     return
 
+  remove: (collider) ->
+    index = @colliders.indexOf(collider)
+
+    if index > -1
+      @colliders.splice(index, 1)
+
   update: ->
     for c in @colliders when not c.frozen
       c.nstep.multiply(@max)
