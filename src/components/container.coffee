@@ -41,4 +41,10 @@ class Container extends Component
     else
       throw new Error("Couldn't create component #{name} in #{@constructor.name}")
 
+  removeComponent: (name) ->
+    if @_cs[name]?
+      delete @_cs[name]
+    else
+      throw new Error("Couldn't remove component #{name} in #{@constructor.name}")
+
 module.exports = Container
