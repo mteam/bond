@@ -23,6 +23,10 @@ class NonlinearAnimation extends love.graphics.Drawable
   curr: ->
     @sequence[@frame]
 
+  rewind: ->
+    @frame = 0
+    @timer = 0
+
   end: ->
 
   draw: (ctx, x, y) ->
