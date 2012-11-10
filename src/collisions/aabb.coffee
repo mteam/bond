@@ -93,6 +93,14 @@ class AABB
     dist.y = ((other.min.y + other.max.y) - (@min.y + @max.y)) / 2
     dist
 
+  includes: (x, y) ->
+    not (
+      @min.x > x or
+      @min.y > y or
+      @max.x < x or
+      @max.y < y
+    )
+
   getWidth: ->
     @max.x - @min.x
 
