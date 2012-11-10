@@ -22,10 +22,12 @@ gui.newButton = (text, x, y, cls) ->
 
 class Container
   constructor: (@el) ->
+    @widgets = []
 
   add: (widget) ->
     if widget.getElement?
       @el.appendChild(widget.getElement())
+      @widgets.push(widget)
     else
       throw new Error("this isn't a widget")
 
@@ -36,8 +38,10 @@ class Container
       throw new Error("this isn't a widget")
 
   clear: ->
-    while @el.lastElementChild isnt @el.firstElementChild
-      @el.removeChild(@el.lastElementChild)
+    for widget in @widgets
+      @remove(widget)
+    
+    @widgets.length = 0
 
 class Button
   constructor: (text, x, y, cls = null) ->
