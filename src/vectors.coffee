@@ -51,4 +51,13 @@ class Vector
   normalize: ->
     @divide(@length())
 
+  @dot: (u, v) ->
+    (u.x * v.x) + (u.y * v.y)
+
+  @angle: (u, v) ->
+    Math.acos(
+      @dot(u, v) /
+      (u.length() * v.length())
+    )
+
 exports.Vector = Vector
