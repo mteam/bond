@@ -42,8 +42,8 @@ class Container
 class Button
   constructor: (text, x, y, cls = null) ->
     @el = document.createElement('button')
-    @el.innerText = text
-    @el.class = cls if cls?
+    @el.textContent = text
+    @el.className = cls if cls?
     @setStyle(position: 'absolute', left: "#{x}px", top: "#{y}px")
 
     love.eventify(this)
